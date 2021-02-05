@@ -1,0 +1,13 @@
+.not-found {
+  width: 100%;
+  max-height: 100vh;
+}
+.content {
+  text-align: center;
+  line-height: 3rem;
+  margin-top: 50%;
+}
+
+.back {
+  text-decoration: underline;
+}

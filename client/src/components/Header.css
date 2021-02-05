@@ -1,0 +1,13 @@
+nav {
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+nav > a {
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}

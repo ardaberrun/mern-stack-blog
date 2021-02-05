@@ -1,0 +1,8 @@
+.pagination {
+  margin-top: 2rem;
+}
+.pagination > a {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-right: 1rem;
+}
