@@ -5,7 +5,6 @@ Express, Mongodb, Mongoose are used to built the server-side and React is used t
 ### Todo
 
 - [ ] Add about page
-- [ ] Add some css to the login page
 - [ ] Add some css to the admin page
 - [ ] Filter by category 
 - [ ] Process blog posts as markdown
@@ -18,11 +17,12 @@ Express, Mongodb, Mongoose are used to built the server-side and React is used t
 
 ### In Progress
 
-- [ ] Add some css to the login page
+- [ ] Add some css to the admin page
 
 ### Done ✓
 
 - [x] Create a blog that can perform CRUD transactions.
+- [x] Add some css to the login page
 
 
 ## Getting started
