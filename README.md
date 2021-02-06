@@ -18,6 +18,7 @@ Express, Mongodb, Mongoose are used to built the server-side and React is used t
 ### In Progress
 
 - [ ] Add some css to the admin page
+- [ ] Filter by category 
 
 ### Done ✓
 
