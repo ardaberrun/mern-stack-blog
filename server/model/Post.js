@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
+const _ = require("lodash");
 
 const PostSchema = mongoose.Schema({
   createdAt: {
@@ -22,6 +23,10 @@ const PostSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+    required: true,
+  },
   slug: {
     type: String,
     required: true,
@@ -35,6 +40,12 @@ PostSchema.pre("validate", function (next) {
       .toString(36)
       .substring(7)}`;
     this.slug = slugify(slug, { lower: true, strict: true });
+  }
+  next();
+});
+PostSchema.pre("validate", function (next) {
+  if (this.tag) {
+    this.category = _.lowerCase(this.tag);
   }
   next();
 });

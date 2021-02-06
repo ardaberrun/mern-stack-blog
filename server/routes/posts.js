@@ -4,8 +4,16 @@ const Post = require("../model/Post");
 
 router.get("/", async (req, res) => {
   try {
-    const posts = await Post.find().sort({ createdAt: "desc" });
-    res.json(posts);
+    const filter = await req.query.q;
+    if (filter === "all") {
+      const posts = await Post.find().sort({ createdAt: "desc" });
+      res.json(posts);
+    } else {
+      const posts = await Post.find({ category: filter }).sort({
+        createdAt: "desc",
+      });
+      res.json(posts);
+    }
   } catch (err) {
     res.json({ message: err });
   }

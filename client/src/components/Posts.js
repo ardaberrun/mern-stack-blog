@@ -1,17 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Posts.css";
 import { Link } from "react-router-dom";
 import API from "../api/api";
 import moment from "moment";
 
+function usePrevious(value) {
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+
+  return ref.current;
+}
+
 function Posts({ tag }) {
   const [data, setData] = useState(null);
+  const previousTag = usePrevious(tag);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        if (!data) {
-          const fetchData = await API.get("/post");
+        if (!data || tag !== previousTag) {
+          const fetchData = await API.get(`/post?q=${tag}`);
           setData(fetchData.data);
         }
       } catch (err) {
@@ -20,7 +31,7 @@ function Posts({ tag }) {
     };
 
     getData();
-  }, [data]);
+  }, [data, tag, previousTag]);
 
   return (
     <div className="articles">
