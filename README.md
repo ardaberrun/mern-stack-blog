@@ -14,11 +14,6 @@ Express, Mongodb, Mongoose are used to built the server-side and React is used t
 - [ ] Add comment feature to posts
 
 
-### In Progress
-
-- [ ] Add some css to the admin page
-
-
 ### Done ✓
 
 - [x] Create a blog that can perform CRUD transactions.
