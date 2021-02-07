@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
+import MarkdownRenderer from "../components/MarkdownRenderer";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import API from "../api/api";
@@ -48,7 +49,7 @@ function PostDetail() {
             {detailPost.tag}{" "}
             {/*<Link to={`/blog/tag/${article.tag}`}> {article.tag}</Link>*/}
           </p>
-          <p className="detail-content">{detailPost.body}</p>
+          <MarkdownRenderer markdown={detailPost.body} />
         </div>
         <Footer />
       </div>

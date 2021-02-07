@@ -11,6 +11,10 @@ const PostSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     required: true,
@@ -45,7 +49,8 @@ PostSchema.pre("validate", function (next) {
 });
 PostSchema.pre("validate", function (next) {
   if (this.tag) {
-    this.category = _.lowerCase(this.tag);
+ 
+    this.category = _.lowerCase(this.tag).split(' ').join('');
   }
   next();
 });

@@ -9,9 +9,11 @@ import Admin from "./pages/Admin";
 import Form from "./pages/Form";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { UserContext } from "./context/UserContext";
+import PostPreviewer from "./pages/PostPreviewer";
+import PreviewProvider from "./context/PreviewContext";
 
 function App() {
-  const {isLogin} = useContext(UserContext);
+  const { isLogin } = useContext(UserContext);
 
   return (
     <Router>
@@ -33,14 +35,19 @@ function App() {
             <Login />
           </Route>
           <Route exact path="/controller-page">
-           { isLogin ?  <Admin /> : <NotFound />}
+            {isLogin ? <Admin /> : <NotFound />}
           </Route>
-          <Route exact path="/controller-page/add">
-           { isLogin ?  <Form /> : <NotFound />}
-          </Route>
-          <Route exact path="/controller-page/edit/:postId">
-           { isLogin ?  <Form /> : <NotFound />}
-          </Route>
+          <PreviewProvider>
+            <Route exact path="/preview">
+              {isLogin ? <PostPreviewer /> : <NotFound />}
+            </Route>
+            <Route exact path="/controller-page/add">
+              {isLogin ? <Form /> : <NotFound />}
+            </Route>
+            <Route exact path="/controller-page/edit/:postId">
+              {isLogin ? <Form /> : <NotFound />}
+            </Route>
+          </PreviewProvider>
           <Route path="*">
             <NotFound />
           </Route>

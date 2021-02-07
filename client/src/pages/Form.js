@@ -1,47 +1,42 @@
-import React, { useState, useMemo } from "react";
-import { withRouter, useHistory, useParams } from "react-router-dom";
+import React, { useState, useMemo, useContext } from "react";
+import { withRouter, useHistory, useParams, Link } from "react-router-dom";
 import "./Form.css";
 import API from "../api/api";
+import { PreviewContext } from "../context/PreviewContext";
 
-function Form({ propsId }) {
+function Form() {
   const history = useHistory();
   const { postId } = useParams();
-
-  const [formDetail, setFormDetail] = useState({
-    title: "",
-    tag: "",
-    image: "",
-    body: "",
-  });
+  const { postPreview, setPostPreview } = useContext(PreviewContext);
 
   useMemo(() => {
     const getData = async () => {
       try {
-        if (postId) {
+        if (postId && postId !== postPreview.id) {
+          console.log("girdi");
           const fetchData = await API.get(`post/unique/${postId}`);
-          console.log(fetchData);
-          setFormDetail(fetchData.data);
+          const { title,description, tag, image, body } = fetchData.data;
+          setPostPreview({ id: postId, title,description, tag, image, body });
         }
       } catch (err) {
         console.log(err);
       }
     };
-
     getData();
-  }, [postId]);
+  }, [postId, postPreview]);
 
   const handleChange = (e) => {
-    setFormDetail({ ...formDetail, [e.target.id]: e.target.value });
+    setPostPreview({ ...postPreview, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!postId) {
-      API.post("/post", formDetail)
+      API.post("/post", postPreview)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     } else {
-      API.put(`/post/${postId}`, formDetail)
+      API.put(`/post/${postId}`, postPreview)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }
@@ -50,21 +45,29 @@ function Form({ propsId }) {
   };
 
   return (
-    formDetail && (
+    postPreview && (
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title</label>
         <input
           type="text"
-          value={formDetail.title}
+          value={postPreview.title}
           id="title"
           placeholder="title.."
+          onChange={handleChange}
+        />
+        <label htmlFor="description">Description</label>
+        <input
+          type="text"
+          value={postPreview.description}
+          id="description"
+          placeholder="Description.."
           onChange={handleChange}
         />
 
         <label htmlFor="tag">Tag</label>
         <input
           type="text"
-          value={formDetail.tag}
+          value={postPreview.tag}
           id="tag"
           placeholder="tag..."
           onChange={handleChange}
@@ -73,7 +76,7 @@ function Form({ propsId }) {
         <label htmlFor="image">Image</label>
         <input
           type="text"
-          value={formDetail.image}
+          value={postPreview.image}
           id="image"
           placeholder="img..."
           onChange={handleChange}
@@ -81,12 +84,15 @@ function Form({ propsId }) {
 
         <label htmlFor="body">Body</label>
         <textarea
-          value={formDetail.body}
+          value={postPreview.body}
           id="body"
           placeholder="body..."
           onChange={handleChange}
         />
 
+        <Link to="/preview">
+          <input type="submit" value="Önizle" />
+        </Link>
         <input type="submit" value="Yolla" />
       </form>
     )

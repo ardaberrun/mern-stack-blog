@@ -49,7 +49,7 @@ function Posts({ tag }) {
               <h2 className="article-title">
                 <Link to={`/blog/posts/${article.slug}`}>{article.title}</Link>
               </h2>
-              <p className="article-desc">{article.body.slice(0, 100)} ...</p>
+              <p className="article-desc">{article.description} </p>
               <footer className="article-footer">
                 <p>
                   {moment(article.createdAt).startOf("now").fromNow()},{" "}

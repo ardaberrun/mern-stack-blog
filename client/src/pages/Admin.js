@@ -11,7 +11,7 @@ function Admin() {
     const getData = async () => {
       try {
         if (!data) {
-          const fetchData = await API.get("/post");
+          const fetchData = await API.get("/post?q=all");
           setData(fetchData.data);
         }
       } catch (err) {
@@ -36,6 +36,7 @@ function Admin() {
 
     history.push("/blog");
   };
+  console.log(data);
   return (
     <div>
       <button className="button" onClick={addPost}>
@@ -47,7 +48,7 @@ function Admin() {
             <div className="post-info">
               <h3>{post.title}</h3>
               <span>Date</span>
-              <p>{post.body.slice(0, 30)}</p>
+              <p>{post.description}</p>
             </div>
             <div className="buttons">
               <button id={post._id} className="button" onClick={editPost}>
