@@ -5,7 +5,6 @@ Express, Mongodb, Mongoose are used to built the server-side and React is used t
 ### Todo
 
 - [ ] Add about page
-- [ ] Add some css to the admin page
 - [ ] Get the picture and text of the about page with the api request.
 - [ ] Pagination
 - [ ] Authentication
