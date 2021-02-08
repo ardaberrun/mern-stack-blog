@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import MarkdownRenderer from "../components/MarkdownRenderer";
 import Footer from "../components/Footer";
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 import API from "../api/api";
 import NotFound from "./404";
 import "./PostDetail.css";
@@ -46,8 +46,9 @@ function PostDetail() {
           <h2 className="detail-title">{detailPost.title}</h2>
           <p className="detail-detail">
             {moment(detailPost.createdAt).startOf("now").fromNow()},{" "}
-            {detailPost.tag}{" "}
-            {/*<Link to={`/blog/tag/${article.tag}`}> {article.tag}</Link>*/}
+            <Link className="detail-detail" to={`/blog/tag/${detailPost.category}`}>
+              {detailPost.tag}
+            </Link>
           </p>
           <MarkdownRenderer markdown={detailPost.body} />
         </div>

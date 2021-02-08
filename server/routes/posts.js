@@ -1,4 +1,5 @@
 const express = require("express");
+const _ = require("lodash");
 const router = express.Router();
 const Post = require("../model/Post");
 
@@ -48,11 +49,11 @@ router.post("/", async (req, res) => {
 });
 router.put("/:postId", async (req, res) => {
   try {
-    const { title, image, body, tag } = req.body;
+    const { title,description, image, body, tag } = req.body;
 
     const updatedPost = await Post.findOneAndUpdate(
       { _id: req.params.postId },
-      { title, image, body, tag }
+      { title,description, image, body, tag,category: _.lowerCase(tag)}
     );
 
     res.json(updatedPost);

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from "react";
+import React, { useMemo, useContext } from "react";
 import { withRouter, useHistory, useParams, Link } from "react-router-dom";
 import "./Form.css";
 import API from "../api/api";
@@ -43,6 +43,7 @@ function Form() {
 
     history.push("/blog");
   };
+
 
   return (
     postPreview && (
