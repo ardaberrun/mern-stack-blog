@@ -23,7 +23,6 @@ mongoose.connect(
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
   },
   (err) => {
     if (err) console.log("Db is not connected!");

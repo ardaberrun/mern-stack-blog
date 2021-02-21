@@ -9,6 +9,7 @@ function Header() {
         <Link to="/blog">ardaberrun</Link>
       </h1>
       <nav>
+        <Link to="/blog/tag/all">Hepsi</Link>
         <Link to="/blog/tag/yazilim">Yazılım</Link>
         <Link to="/blog/tag/diger">ve Diğerleri</Link>
       </nav>

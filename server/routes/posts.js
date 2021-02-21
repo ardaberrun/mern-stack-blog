@@ -5,15 +5,27 @@ const Post = require("../model/Post");
 
 router.get("/", async (req, res) => {
   try {
+    const PAGE_SIZE = 10;
+    const page = await parseInt(req.query.page || "0");
     const filter = await req.query.q;
+  
     if (filter === "all") {
-      const posts = await Post.find().sort({ createdAt: "desc" });
-      res.json(posts);
+      const total = await Post.countDocuments();
+      const posts = await Post.find()
+        .sort({ createdAt: "desc" })
+        .limit(PAGE_SIZE)
+        .skip(PAGE_SIZE * page);
+  
+      res.json({ totalPages: Math.ceil(total / PAGE_SIZE), posts });
     } else {
-      const posts = await Post.find({ category: filter }).sort({
-        createdAt: "desc",
-      });
-      res.json(posts);
+      const total = await Post.countDocuments({ category: filter });
+      const posts = await Post.find({ category: filter })
+        .sort({
+          createdAt: "desc",
+        })
+        .limit(PAGE_SIZE)
+        .skip(PAGE_SIZE * page);
+      res.json({ totalPages: Math.ceil(total / PAGE_SIZE), posts });
     }
   } catch (err) {
     res.json({ message: err });
@@ -49,11 +61,11 @@ router.post("/", async (req, res) => {
 });
 router.put("/:postId", async (req, res) => {
   try {
-    const { title,description, image, body, tag } = req.body;
+    const { title, description, image, body, tag } = req.body;
 
     const updatedPost = await Post.findOneAndUpdate(
       { _id: req.params.postId },
-      { title,description, image, body, tag,category: _.lowerCase(tag)}
+      { title, description, image, body, tag, category: _.lowerCase(tag) }
     );
 
     res.json(updatedPost);

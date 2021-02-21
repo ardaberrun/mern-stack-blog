@@ -1,41 +1,15 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useContext} from "react";
 import "./Posts.css";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import API from "../api/api";
 import moment from "moment";
 import { UserContext } from "../context/UserContext";
 
-function usePrevious(value) {
-  const ref = useRef();
 
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-
-  return ref.current;
-}
-
-function Posts({ tag }) {
-  const [data, setData] = useState(null);
-  const previousTag = usePrevious(tag);
+function Posts({data}) {
   const history = useHistory();
   const { isLogin } = useContext(UserContext);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        if (!data || tag !== previousTag) {
-          const fetchData = await API.get(`/post?q=${tag}`);
-          setData(fetchData.data);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    getData();
-  }, [data, tag, previousTag]);
-
+  
   const addPost = (e) => {
     history.push("/blog/add");
   };
@@ -48,7 +22,7 @@ function Posts({ tag }) {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
-    history.push("/blog");
+    window.location.reload();
   };
 
   return (

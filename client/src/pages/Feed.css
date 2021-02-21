@@ -1,0 +1,17 @@
+.pagination-button {
+    background: transparent;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-left: 1rem;
+
+}
+.pagination-button:first-child {
+    margin-left: 0;
+}
+.pagination-button:hover {
+    text-decoration: underline;
+}
+

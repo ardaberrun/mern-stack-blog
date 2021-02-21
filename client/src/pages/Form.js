@@ -41,7 +41,7 @@ function Form() {
         .catch((err) => console.log(err));
     }
 
-    history.push("/blog");
+    history.push("/blog/tag/all");
   };
 
 
