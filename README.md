@@ -6,7 +6,6 @@ Express, Mongodb, Mongoose are used to built the server-side and React is used t
 
 - [ ] Add about page
 - [ ] Get the picture and text of the about page with the api request.
-- [ ] Pagination
 - [ ] Authentication
 - [ ] Add comment feature to posts
 
@@ -18,6 +17,7 @@ Express, Mongodb, Mongoose are used to built the server-side and React is used t
 - [x] Filter by category 
 - [x] Render blog posts as markdown
 - [x] Markdown previewer
+- [x] Pagination
 
 
 ## Getting started
