@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./404.css";
+import "./NotFound.css";
 
 function NotFound() {
   return (
@@ -10,7 +10,7 @@ function NotFound() {
           Maalesef böyle bir sayfa yok..!
           <br />
           <br />
-          <Link to="/blog" className="back">
+          <Link to="/blog/tag/all" className="back">
             Blog'a dön!
           </Link>
         </h1>

@@ -3,7 +3,7 @@ import "./App.css";
 import Feed from "./pages/Feed";
 import PostDetail from "./pages/PostDetail";
 import About from "./pages/About";
-import NotFound from "./pages/404";
+import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Form from "./pages/Form";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

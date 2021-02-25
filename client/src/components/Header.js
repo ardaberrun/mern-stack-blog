@@ -6,7 +6,7 @@ function Header() {
   return (
     <header>
       <h1>
-        <Link to="/blog">ardaberrun</Link>
+        <Link to="/">ardaberrun</Link>
       </h1>
       <nav>
         <Link to="/blog/tag/all">Hepsi</Link>

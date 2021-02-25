@@ -4,7 +4,7 @@ import MarkdownRenderer from "../components/MarkdownRenderer";
 import Footer from "../components/Footer";
 import { useParams,Link } from "react-router-dom";
 import API from "../api/api";
-import NotFound from "./404";
+import NotFound from "./NotFound";
 import "./PostDetail.css";
 import moment from "moment";
 

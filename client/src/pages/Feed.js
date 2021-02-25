@@ -46,17 +46,23 @@ function Feed() {
     <>
       <Header />
       <Posts data={postData && postData.posts} />
-    {pages.length > 1 && <div className="pagination">
-      {pages.map((pageIndex) => (
-        <button
-          className="pagination-button"
-          key={pageIndex}
-          onClick={() => setPageNumber(pageIndex)}
-        >
-          {pageIndex + 1}
-        </button>
-      ))}
-      </div>}
+      {pages.length > 1 && (
+        <div className="pagination">
+          {pages.map((pageIndex) => (
+            <button
+              className="pagination-button"
+              key={pageIndex}
+              onClick={() => {
+                setPageNumber(pageIndex);
+                // back to the top of the page
+                document.documentElement.scrollTop = 0;
+              }}
+            >
+              {pageIndex + 1}
+            </button>
+          ))}
+        </div>
+      )}
       <Footer />
     </>
   );
