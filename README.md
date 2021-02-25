@@ -1,6 +1,6 @@
 # Mern Stack Blog
 
-Express, Mongodb, Mongoose are used to built the server-side and React is used to built client-side but I still continue to develop this project.
+Express, Mongodb, Mongoose are used to built the server-side and React is used to built client-side but this project not completed yet :warning: .
 
 ### Todo
 
