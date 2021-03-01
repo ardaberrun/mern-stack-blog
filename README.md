@@ -1,11 +1,8 @@
 # Mern Stack Blog
 
-Express, Mongodb, Mongoose are used to built the server-side and React is used to built client-side but this project not completed yet :warning: .
+Express, Mongodb, Mongoose are used to built the server-side and React is used to built client-side.
 
 ### Todo
-
-- [ ] Authentication
-
 
 
 ### Done ✓
@@ -18,6 +15,7 @@ Express, Mongodb, Mongoose are used to built the server-side and React is used t
 - [x] Pagination
 - [x] Add about page
 - [x] Get the picture and text of the about page with the api request.
+- [x] Simple Authorization
 
 
 ## Getting started
@@ -35,6 +33,6 @@ MONGO_URI = mongodb+srv://<username>:<password>@cluster0.xicfl.mongodb.net/<dbna
 PORT = 5000
 SECRET_ADMIN_USERNAME = admin
 SECRET_ADMIN_PASSWORD = 12345 
-// I will perform the authentication procedures in the future using SECRET_ADMIN_USERNAME and SECRET_ADMIN_PASSWORD .
+// SECRET_ADMIN_USERNAME and SECRET_ADMIN_PASSWORD required for authorization.
 ```
 4. Start the server and client.
