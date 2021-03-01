@@ -30,7 +30,11 @@ function About() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    API.put(`/about/${about._id}`, about)
+    API.put(`/about/${about._id}`, about, {
+      headers: {
+        "x-auth-token": localStorage.getItem("x-auth-token"),
+      },
+    })
       .then((res) => console.log(res))
       .catch((err) => console.log(err))
       .finally(() => setEdit(false));
@@ -80,7 +84,12 @@ function About() {
               <h2 className="about-title">{about.title}</h2>
               <p className="about-body">{about.body}</p>
             </div>
-            <h3 className="go-to-blog" onClick={() => history.push("/blog/tag/all")}>Blog'a git!</h3>
+            <h3
+              className="go-to-blog"
+              onClick={() => history.push("/blog/tag/all")}
+            >
+              Blog'a git!
+            </h3>
             <div className="about-footer">
               <div>
                 <a href="https://www.instagram.com/">Instagram</a>

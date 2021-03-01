@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
-import { useHistory, withRouter } from "react-router-dom";
+import { useHistory, withRouter, Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import "./Login.css";
+import API from "../api/api";
 
 function Login() {
   const [data, setData] = useState({
-    username: null,
-    password: null,
+    username: "",
+    password: "",
   });
   const history = useHistory();
   const { setIsLogin } = useContext(UserContext);
@@ -18,15 +19,23 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
-    if (data.username === "ardaberrun" && data.password === "12345") {
-      setTimeout(() => {
-        setIsLogin(true);
-        history.push("/controller-page");
-      }, 2500);
-    }
+    API.post("/login", data)
+      .then((res) => {
+        if (res.data.isAdmin) {
+          setIsLogin(true);
+          localStorage.setItem("x-auth-token", res.data.token);
+        }
+      })
+      .catch((err) => console.log(err));
+
+    history.push("/blog/tag/all");
   };
 
-  return (
+  return localStorage.getItem("x-auth-token") ? (
+    <h1>
+      Zaten Giriş Yaptınız! <Link to="/blog/tag/all">Sayfaya Dön!</Link>
+    </h1>
+  ) : (
     <form onSubmit={handleSubmit}>
       <input
         name="username"

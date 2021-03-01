@@ -1,15 +1,14 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import "./Posts.css";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import API from "../api/api";
 import moment from "moment";
 import { UserContext } from "../context/UserContext";
 
-
-function Posts({data}) {
+function Posts({ data }) {
   const history = useHistory();
   const { isLogin } = useContext(UserContext);
-  
+
   const addPost = (e) => {
     history.push("/blog/add");
   };
@@ -18,19 +17,32 @@ function Posts({data}) {
     history.push(`/blog/edit/${e.target.id}`);
   };
   const deletePost = (e) => {
-    API.delete(`/post/${e.target.id}`)
+    API.delete(`/post/${e.target.id}`, {
+      headers: {
+        "x-auth-token": localStorage.getItem("x-auth-token"),
+      },
+    })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 
+    window.location.reload();
+  };
+  const logout = () => {
+    localStorage.removeItem("x-auth-token");
     window.location.reload();
   };
 
   return (
     <>
       {isLogin && (
-        <button className="btn green " onClick={addPost}>
-          New
-        </button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <button className="btn green " onClick={addPost}>
+            New
+          </button>
+          <button className="btn red " onClick={logout}>
+            Log Out
+          </button>
+        </div>
       )}
 
       <div className="articles">
@@ -53,8 +65,11 @@ function Posts({data}) {
                 <p className="article-desc">{article.description} </p>
                 <footer className="article-footer">
                   <p>
-                    {moment(article.createdAt).startOf("now").fromNow()},{" "}  
-                    <Link to={`/blog/tag/${article.category}`}> {article.tag}</Link>
+                    {moment(article.createdAt).startOf("now").fromNow()},{" "}
+                    <Link to={`/blog/tag/${article.category}`}>
+                      {" "}
+                      {article.tag}
+                    </Link>
                   </p>
                 </footer>
                 {isLogin && (

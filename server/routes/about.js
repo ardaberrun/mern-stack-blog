@@ -2,6 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const About = require("../model/About");
+const auth = require('../middleware/auth');
 
 const defaultAbout = {
   title: "Merhaba, Hakkımda Sayfama Hoşgeldin",
@@ -36,7 +37,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put("/:aboutId", async (req, res) => {
+router.put("/:aboutId", auth,async (req, res) => {
   try {
     const { title, image, body } = req.body;
 

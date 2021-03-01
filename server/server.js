@@ -5,6 +5,7 @@ dotenv.config();
 const cors = require("cors");
 const postRoute = require("./routes/posts");
 const aboutRoute = require("./routes/about");
+const loginRoute = require("./routes/login");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cors());
 app.use("/post", postRoute);
 app.use("/about", aboutRoute);
+app.use("/login", loginRoute);
 
 const PORT = process.env.PORT || 5000;
 

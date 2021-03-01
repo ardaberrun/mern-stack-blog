@@ -13,10 +13,9 @@ function Form() {
     const getData = async () => {
       try {
         if (postId && postId !== postPreview.id) {
-          console.log("girdi");
           const fetchData = await API.get(`post/unique/${postId}`);
-          const { title,description, tag, image, body } = fetchData.data;
-          setPostPreview({ id: postId, title,description, tag, image, body });
+          const { title, description, tag, image, body } = fetchData.data;
+          setPostPreview({ id: postId, title, description, tag, image, body });
         }
       } catch (err) {
         console.log(err);
@@ -32,18 +31,25 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!postId) {
-      API.post("/post", postPreview)
+      API.post("/post", postPreview, {
+        headers: {
+          "x-auth-token": localStorage.getItem("x-auth-token"),
+        },
+      })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     } else {
-      API.put(`/post/${postId}`, postPreview)
+      API.put(`/post/${postId}`, postPreview, {
+        headers: {
+          "x-auth-token": localStorage.getItem("x-auth-token"),
+        },
+      })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }
 
     history.push("/blog/tag/all");
   };
-
 
   return (
     postPreview && (
